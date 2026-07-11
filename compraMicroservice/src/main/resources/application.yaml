@@ -1,0 +1,42 @@
+server:
+  #servlet:context-path: /cancion/api/    #ocasiona fallo!
+  port: 8087
+
+spring:
+  application:
+    name: compraMicroservice
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_musica_04
+    username: root
+    password: ''
+  jpa:
+    hibernate:
+      ddl-auto: update
+      #ddl-auto: create-drop   #Para Re-hacer la tabla
+    show-sql: 'true'
+    properties:
+      hibernate:
+        format_sql: 'true'
+        dialect: org.hibernate.dialect.MySQLDialect
+  flyway:
+    enabled: true
+    #repair: true     #ocasiona fallo!
+    locations: classpath:db/migration
+
+app:
+  jwt:
+    secret: mi-clave-jlp-18394872519930505mie-2026
+    expiration-ms: 600000000
+
+logging:
+  level:
+    root: INFO
+    jlp:
+      musica03:
+        compraMicroservice: INFO
+
+#Servicios WebClient
+album-service:
+  url: http://localhost:8086/api/albumes
+operario-service:
+  url: http://localhost:8083/api/operarios
